@@ -1,0 +1,53 @@
+---
+description: Reglas para DTOs y validación con class-validator
+globs: backend/**/dto/*.dto.ts
+alwaysApply: false
+---
+
+# DTO Validation Rules
+
+## Estructura Obligatoria
+
+- Todo DTO de entrada debe usar decoradores de `class-validator`
+- **Todas las propiedades en inglés** (`name`, `price`, `productId`, `quantity`)
+- Los DTOs se colocan en `modulo/dto/`
+- ValidationPipe global: `whitelist: true`, `forbidNonWhitelisted: true`, `transform: true`
+
+## Reglas de Validación por Tipo
+
+| Tipo campo | Decoradores requeridos |
+|------------|------------------------|
+| string | `@IsString()`, `@IsNotEmpty()`, `@MaxLength(n)` |
+| number (price) | `@IsNumber({ maxDecimalPlaces: 2 })`, `@Min(0.01)` |
+| int (quantity) | `@IsInt()`, `@Min(1)` |
+| enum | `@IsEnum(EnumName)` |
+| opcional | `@IsOptional()` |
+
+## Ejemplo
+
+```typescript
+export class CreateProductDto {
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(50)
+  sku: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(200)
+  name: string;
+
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @Min(0.01)
+  price: number;
+
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  minimumStock?: number;
+}
+```
+
+## Campo SKU Inmutable
+
+- El campo `sku` **NO** debe incluirse en `UpdateProductDto`

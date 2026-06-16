@@ -1,0 +1,200 @@
+{
+  "info": {
+    "name": "Inventario API — Inventory & Movements",
+    "description": "Colección para probar endpoints de inventario (TK-06) y filtros avanzados de movimientos (TK-05).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api"
+    },
+    {
+      "key": "productId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "GET /inventory — Listado con stock calculado",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/inventory",
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory"]
+            }
+          }
+        },
+        {
+          "name": "GET /inventory — Filtrar por name y status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/inventory?name=Laptop&status=active",
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory"],
+              "query": [
+                { "key": "name", "value": "Laptop" },
+                { "key": "status", "value": "active" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /inventory/products/:id — Stock de un producto",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/inventory/products/{{productId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory", "products", "{{productId}}"]
+            }
+          }
+        },
+        {
+          "name": "GET /inventory/alerts/low-stock — Alertas de stock bajo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/inventory/alerts/low-stock",
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory", "alerts", "low-stock"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Movements — Filtros avanzados",
+      "item": [
+        {
+          "name": "GET /movements — Sin filtros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movements",
+              "host": ["{{baseUrl}}"],
+              "path": ["movements"]
+            }
+          }
+        },
+        {
+          "name": "GET /movements — Por productId y type",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movements?productId={{productId}}&type=outbound",
+              "host": ["{{baseUrl}}"],
+              "path": ["movements"],
+              "query": [
+                { "key": "productId", "value": "{{productId}}" },
+                { "key": "type", "value": "outbound" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /movements — Rango de fechas válido",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movements?startDate=2026-01-01&endDate=2026-12-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["movements"],
+              "query": [
+                { "key": "startDate", "value": "2026-01-01" },
+                { "key": "endDate", "value": "2026-12-31" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /movements — Rango inválido (400)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movements?startDate=2026-12-31&endDate=2026-01-01",
+              "host": ["{{baseUrl}}"],
+              "path": ["movements"],
+              "query": [
+                { "key": "startDate", "value": "2026-12-31" },
+                { "key": "endDate", "value": "2026-01-01" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /movements — Filtros combinados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movements?productId={{productId}}&type=inbound&startDate=2026-01-01&endDate=2026-06-30",
+              "host": ["{{baseUrl}}"],
+              "path": ["movements"],
+              "query": [
+                { "key": "productId", "value": "{{productId}}" },
+                { "key": "type", "value": "inbound" },
+                { "key": "startDate", "value": "2026-01-01" },
+                { "key": "endDate", "value": "2026-06-30" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /movements — Registrar inbound",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": {{productId}},\n  \"type\": \"inbound\",\n  \"quantity\": 10,\n  \"reason\": \"purchase\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/movements",
+              "host": ["{{baseUrl}}"],
+              "path": ["movements"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products — Setup de prueba",
+      "item": [
+        {
+          "name": "POST /products — Crear producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sku\": \"LPT-001\",\n  \"name\": \"Laptop Gamer X\",\n  \"description\": \"Laptop 16 GB RAM\",\n  \"price\": 1500.00,\n  \"minimumStock\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["products"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

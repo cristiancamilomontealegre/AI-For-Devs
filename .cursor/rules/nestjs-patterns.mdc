@@ -1,0 +1,65 @@
+---
+description: Patrones y convenciones específicas de NestJS
+globs: backend/**/*.{controller,service,module}.ts
+alwaysApply: false
+---
+
+# NestJS Patterns
+
+## Estructura de Módulos
+
+Cada módulo debe tener:
+- **Controller**: maneja endpoints HTTP
+- **Service**: contiene la lógica de negocio
+- **Module**: declara y exporta el módulo
+
+## Controllers
+
+```typescript
+// ✅ BIEN - decoradores descriptivos
+@Controller('products')
+export class ProductsController {
+  constructor(private readonly productsService: ProductsService) {}
+
+  @Get()
+  findAll(): Promise<Product[]> {
+    return this.productsService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Product> {
+    return this.productsService.findOne(id);
+  }
+}
+```
+
+## Services
+
+```typescript
+// ✅ BIEN - inyección de dependencias, async/await
+@Injectable()
+export class ProductsService {
+  constructor(
+    @InjectRepository(Product)
+    private readonly productRepository: Repository<Product>,
+  ) {}
+
+  async findAll(): Promise<Product[]> {
+    return this.productRepository.find();
+  }
+}
+```
+
+## Validation Pipe
+
+Configurar en `main.ts`:
+
+```typescript
+app.useGlobalPipes(
+  new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true,
+  }),
+);
+```

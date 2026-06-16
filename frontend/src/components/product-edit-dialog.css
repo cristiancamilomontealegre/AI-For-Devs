@@ -1,0 +1,84 @@
+.product-edit-dialog__backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgb(17 24 39 / 0.45);
+  z-index: 50;
+}
+
+.product-edit-dialog {
+  width: 100%;
+  max-width: 28rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+.product-edit-dialog__header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.product-edit-dialog__sku {
+  margin: 0.35rem 0 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.product-edit-dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.product-edit-dialog__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.product-edit-dialog__field input {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-weight: 400;
+}
+
+.product-edit-dialog__error {
+  margin: 0;
+  color: #b91c1c;
+  font-size: 0.875rem;
+}
+
+.product-edit-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.product-edit-dialog__actions button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.product-edit-dialog__actions button[type='submit'] {
+  border-color: #2563eb;
+  background-color: #2563eb;
+  color: #fff;
+}
+
+.product-edit-dialog__actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

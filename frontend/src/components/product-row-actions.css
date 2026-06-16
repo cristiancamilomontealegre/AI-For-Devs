@@ -1,0 +1,68 @@
+.product-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.product-row-actions__button {
+  padding: 0.3rem 0.55rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.product-row-actions__button:hover:not(:disabled) {
+  background-color: #f3f4f6;
+}
+
+.product-row-actions__button--danger {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+  color: #991b1b;
+  font-weight: 600;
+}
+
+.product-row-actions__button--danger:hover:not(:disabled) {
+  background-color: #fee2e2;
+}
+
+.product-row-actions__button--link {
+  display: inline-flex;
+  align-items: center;
+  border-color: #2563eb;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.product-row-actions__button--link:hover {
+  background-color: #dbeafe;
+}
+
+.product-row-actions__button--protected {
+  border: 1px dashed #d97706;
+  background-color: #fffbeb;
+  color: #92400e;
+  font-weight: 600;
+}
+
+.product-row-actions__button--protected:hover:not(:disabled) {
+  background-color: #fef3c7;
+}
+
+.product-row-actions__button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.product-row-actions__hint {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.35;
+  color: #92400e;
+}

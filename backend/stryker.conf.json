@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "packageManager": "pnpm",
+  "plugins": ["@stryker-mutator/jest-runner"],
+  "testRunner": "jest",
+  "coverageAnalysis": "perTest",
+  "reporters": ["html", "clear-text", "progress", "json"],
+  "mutate": [
+    "src/products/products.service.ts",
+    "src/movements/movements.service.ts",
+    "src/inventory/inventory.service.ts"
+  ],
+  "jest": {
+    "projectType": "custom",
+    "configFile": "jest.stryker.config.js",
+    "enableFindRelatedTests": false
+  },
+  "tempDirName": "stryker-tmp",
+  "timeoutMS": 20000,
+  "concurrency": 6,
+  "thresholds": {
+    "high": 80,
+    "low": 60,
+    "break": 50
+  }
+}

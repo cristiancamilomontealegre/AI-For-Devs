@@ -1,0 +1,74 @@
+---
+description: Estándares de código fundamentales que aplican a todo el proyecto
+alwaysApply: true
+---
+
+# Estándares Fundamentales del Proyecto
+
+## Stack Tecnológico
+
+- **Backend**: NestJS + TypeORM + PostgreSQL
+- **Frontend**: React + Vite + TypeScript + Axios
+- **API**: REST (JSON)
+- **Base de datos**: PostgreSQL 14+
+
+## Convenciones de Naming
+
+**Todas las variables, propiedades, parámetros de API y columnas de base de datos deben estar en inglés.**
+
+| Contexto | Convención | Ejemplo |
+|----------|------------|---------|
+| TypeScript (backend) | camelCase | `productService`, `findAll()` |
+| Clases/Types/Enums | PascalCase | `CreateProductDto`, `ProductStatus` |
+| Interfaces | PascalCase | `IStockResult` |
+| Constantes globales | UPPER_SNAKE_CASE | `MAX_SKU_LENGTH` |
+| Columnas DB | snake_case (inglés) | `minimum_stock`, `product_id` |
+| Propiedades API/DTO | camelCase (inglés) | `productId`, `currentStock`, `minimumStock` |
+| React componentes | PascalCase | `StockBadge`, `ProductList` |
+| React hooks | camelCase con `use` | `useProducts`, `useStock` |
+| Archivos TS/TSX | kebab-case | `product.entity.ts`, `stock-badge.tsx` |
+| Carpetas módulo | plural | `products/`, `movements/` |
+
+### Ejemplos de mapeo (español → inglés)
+
+| ❌ Evitar | ✅ Usar |
+|-----------|---------|
+| `productoId` | `productId` |
+| `nombre` | `name` |
+| `descripcion` | `description` |
+| `precio` | `price` |
+| `stockMinimo` | `minimumStock` |
+| `stockActual` | `currentStock` |
+| `alertaStock` | `lowStockAlert` |
+| `estado` | `status` |
+| `cantidad` | `quantity` |
+| `razon` | `reason` |
+| `tipo` (movimiento) | `type` |
+| `fechaInicio` / `fechaFin` | `startDate` / `endDate` |
+
+## Gestor de Paquetes
+
+- **Backend y Frontend**: `pnpm` (versión `10.28.2`)
+
+## Scripts de Proyecto (backend)
+
+```json
+{
+  "scripts": {
+    "start:dev": "nest start --watch",
+    "build": "nest build",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "test": "jest",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  }
+}
+```
+
+## Reglas de Código
+
+- No eliminar código funcional sin justificación
+- Documentar decisiones arquitectónicas importantes
+- Mantener código limpio y legible
+- Evitar comentarios redundantes que solo narran lo que hace el código

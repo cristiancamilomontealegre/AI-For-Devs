@@ -1,0 +1,64 @@
+---
+description: Política de manejo de errores y excepciones NestJS
+globs: backend/**/*.{service,controller}.ts
+alwaysApply: false
+---
+
+# Error Handling Policy
+
+## Mensajes de Error
+
+- **Idioma**: inglés (API y mensajes técnicos)
+- **Centralización**: usar `ErrorMessages` de `shared/constants/error-messages.ts`
+- **No usar i18n** hasta que se requiera soporte multi-idioma (`Accept-Language`)
+
+```typescript
+import { ErrorMessages } from '../shared/constants/error-messages';
+
+throw new ConflictException(ErrorMessages.SKU_ALREADY_EXISTS);
+throw new NotFoundException(ErrorMessages.PRODUCT_NOT_FOUND(id));
+```
+
+## Jerarquía de Excepciones
+
+| Situación | Excepción | HTTP |
+|-----------|-----------|------|
+| Product not found | `NotFoundException` | 404 |
+| Duplicate SKU | `ConflictException` | 409 |
+| Product with movements (delete) | `ConflictException` | 409 |
+| Insufficient stock | `BadRequestException` | 400 |
+| Invalid quantity (<=0) | `BadRequestException` | 400 |
+| Movement on inactive product | `BadRequestException` | 400 |
+| Validation failed (class-validator) | `BadRequestException` | 400 |
+| Invalid status | `BadRequestException` | 400 |
+
+## Reglas Críticas
+
+```typescript
+if (movementCount > 0) {
+  throw new ConflictException(ErrorMessages.PRODUCT_HAS_MOVEMENTS);
+}
+
+if (dto.type === MovementType.OUTBOUND && currentStock < dto.quantity) {
+  throw new BadRequestException(ErrorMessages.INSUFFICIENT_STOCK);
+}
+
+if (product.status === ProductStatus.INACTIVE) {
+  throw new BadRequestException(ErrorMessages.INACTIVE_PRODUCT_MOVEMENT);
+}
+```
+
+## Formato de Respuesta Unificado
+
+```json
+{
+  "statusCode": 400,
+  "message": "Insufficient stock to complete outbound movement",
+  "timestamp": "2026-06-15T15:00:00.000Z",
+  "path": "/api/movements"
+}
+```
+
+## Cuándo agregar nestjs-i18n
+
+Solo si el frontend necesita mensajes en varios idiomas según `Accept-Language` o locale del usuario. Hasta entonces, `ErrorMessages` es suficiente.

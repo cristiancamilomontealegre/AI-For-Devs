@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Build
+dist/
+build/
+dist-ssr/
+*.tsbuildinfo
+
+# Tests & coverage
+coverage/
+.nyc_output/
+stryker-tmp/
+reports/
+
+# Playwright (E2E)
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# IDE / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temp
+tmp/
+temp/
+*.tmp
+*.local
+
+# Lockfiles from other package managers (project uses pnpm)
+package-lock.json
+yarn.lock

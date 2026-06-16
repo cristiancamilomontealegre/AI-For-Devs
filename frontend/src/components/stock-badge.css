@@ -1,0 +1,34 @@
+.stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.stock-badge--success {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.stock-badge--danger {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.stock-badge--inactive {
+  background-color: #e5e7eb;
+  color: #4b5563;
+}
+
+.stock-badge--unknown {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+}
+
+.stock-badge__alert {
+  font-size: 0.75rem;
+}

@@ -1,0 +1,78 @@
+---
+description: Reglas de negocio críticas del sistema de inventario
+alwaysApply: true
+---
+
+# Business Rules
+
+## Reglas Fundamentales
+
+### 1. Stock Calculado Dinámicamente
+
+El stock actual se calcula como:
+
+```sql
+currentStock = COALESCE(
+  SUM(CASE WHEN type = 'inbound' THEN quantity ELSE 0 END), 0
+) - COALESCE(
+  SUM(CASE WHEN type = 'outbound' THEN quantity ELSE 0 END), 0
+)
+```
+
+**Nunca almacenar el stock en una columna de la tabla `products`.**
+
+### 2. Protección de Borrado
+
+No se permite `DELETE` de un producto si existen movimientos asociados:
+
+```typescript
+if (movementCount > 0) {
+  throw new ConflictException(ErrorMessages.PRODUCT_HAS_MOVEMENTS);
+}
+```
+
+### 3. Stock Suficiente para Salidas
+
+```typescript
+if (dto.type === MovementType.OUTBOUND && currentStock < dto.quantity) {
+  throw new BadRequestException(ErrorMessages.INSUFFICIENT_STOCK);
+}
+```
+
+### 4. SKU Inmutable
+
+- El `sku` es único y no puede modificarse después de la creación
+- No incluir `sku` en `UpdateProductDto`
+
+### 5. Movimientos Solo en Productos Activos
+
+```typescript
+if (product.status === ProductStatus.INACTIVE) {
+  throw new BadRequestException(ErrorMessages.INACTIVE_PRODUCT_MOVEMENT);
+}
+```
+
+### 6. Cantidad Siempre Positiva
+
+```typescript
+if (dto.quantity <= 0) {
+  throw new BadRequestException('Quantity must be greater than 0');
+}
+```
+
+## Tipos de Movimiento
+
+### Razones Predefinidas
+
+- **inbound**: `purchase`, `adjustment`, `return`
+- **outbound**: `sale`, `adjustment`, `loss`
+
+## Alertas de Stock Mínimo
+
+Un producto está en alerta cuando:
+
+```
+currentStock <= minimumStock
+```
+
+Debe mostrarse con indicador visual rojo en el frontend.

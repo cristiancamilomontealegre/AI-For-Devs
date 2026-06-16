@@ -1,0 +1,137 @@
+.product-form {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.product-form__header {
+  margin-bottom: 1.5rem;
+}
+
+.product-form__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.product-form__subtitle {
+  margin: 0.35rem 0 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.product-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+.product-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.product-form__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.product-form__input,
+.product-form__textarea,
+.product-form__select {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.95rem;
+  background-color: #fff;
+}
+
+.product-form__textarea {
+  min-height: 5rem;
+  resize: vertical;
+}
+
+.product-form__input:focus,
+.product-form__textarea:focus,
+.product-form__select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+  border-color: #2563eb;
+}
+
+.product-form__input--error {
+  border-color: #dc2626;
+}
+
+.product-form__input--error:focus {
+  outline-color: #dc2626;
+  border-color: #dc2626;
+}
+
+.product-form__error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #dc2626;
+}
+
+.product-form__banner {
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.product-form__banner--error {
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.product-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.product-form__button {
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.product-form__button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.product-form__button--primary {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+.product-form__button--primary:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.product-form__button--secondary {
+  background-color: #fff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.product-form__button--secondary:hover:not(:disabled) {
+  background-color: #f9fafb;
+}

@@ -1,0 +1,58 @@
+---
+description: Convenciones de base de datos y TypeORM
+globs: backend/**/entities/*.entity.ts
+alwaysApply: false
+---
+
+# Database & TypeORM Rules
+
+## Convenciones de Naming
+
+- **Propiedades TypeScript**: camelCase en inglés (`productId`, `minimumStock`)
+- **Columnas DB**: snake_case en inglés (`product_id`, `minimum_stock`)
+- **Tablas**: plural en inglés (`products`, `movements`)
+
+## Entidades TypeORM
+
+```typescript
+@Entity('products')
+export class Product {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ unique: true, length: 50 })
+  sku: string;
+
+  @Column({ length: 200 })
+  name: string;
+
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  price: number;
+
+  @Column({ name: 'minimum_stock', default: 0 })
+  minimumStock: number;
+
+  @Column({ type: 'enum', enum: ProductStatus, default: ProductStatus.ACTIVE })
+  status: ProductStatus;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+}
+```
+
+## Reglas de Stock
+
+El stock se calcula dinámicamente; **no crear columna `stock`** en `products`.
+
+```typescript
+async calculateStock(productId: number): Promise<number> {
+  const result = await this.movementRepository
+    .createQueryBuilder('movement')
+    .select(`SUM(CASE WHEN movement.type = 'inbound' THEN movement.quantity ELSE 0 END)`, 'inboundTotal')
+    .addSelect(`SUM(CASE WHEN movement.type = 'outbound' THEN movement.quantity ELSE 0 END)`, 'outboundTotal')
+    .where('movement.product_id = :productId', { productId })
+    .getRawOne();
+
+  return Number(result.inboundTotal) - Number(result.outboundTotal);
+}
+```

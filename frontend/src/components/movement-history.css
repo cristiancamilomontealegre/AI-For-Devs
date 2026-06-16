@@ -1,0 +1,106 @@
+.movement-history {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.movement-history__header {
+  margin-bottom: 1.5rem;
+}
+
+.movement-history__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.movement-history__subtitle {
+  margin: 0.35rem 0 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.movement-history__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.movement-history__filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 10rem;
+}
+
+.movement-history__filter-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.movement-history__input,
+.movement-history__select {
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+.movement-history__count {
+  margin: 0 0 1rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.movement-history__empty {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.movement-history__table-wrapper {
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+.movement-history__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.movement-history__table th,
+.movement-history__table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.movement-history__table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.movement-history__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.movement-history__type--inbound {
+  color: #047857;
+  font-weight: 600;
+}
+
+.movement-history__type--outbound {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.movement-history__product-sku {
+  display: block;
+  font-size: 0.8rem;
+  color: #6b7280;
+}

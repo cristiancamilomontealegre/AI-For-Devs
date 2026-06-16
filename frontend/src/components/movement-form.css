@@ -1,0 +1,235 @@
+.movement-form {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.movement-form__header {
+  margin-bottom: 1.5rem;
+}
+
+.movement-form__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.movement-form__subtitle {
+  margin: 0.35rem 0 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.movement-form__banner {
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.movement-form__banner--error {
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.movement-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+.movement-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 540px) {
+  .movement-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.movement-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.movement-form__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.movement-form__input,
+.movement-form__select {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.95rem;
+  background-color: #fff;
+}
+
+.movement-form__input:focus,
+.movement-form__select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+  border-color: #2563eb;
+}
+
+.movement-form__input--error {
+  border-color: #dc2626;
+}
+
+.movement-form__input--error:focus {
+  outline-color: #dc2626;
+  border-color: #dc2626;
+}
+
+.movement-form__error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #dc2626;
+}
+
+.movement-form__radio-group {
+  display: flex;
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+.movement-form__radio {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.movement-form__summary {
+  padding: 1rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+}
+
+.movement-form__summary-title {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+.movement-form__summary-loading {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.movement-form__summary-error {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.movement-form__summary-error p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #991b1b;
+}
+
+.movement-form__summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 0;
+}
+
+.movement-form__summary-grid dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+.movement-form__summary-grid dd {
+  margin: 0.25rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.movement-form__summary-negative {
+  color: #dc2626 !important;
+}
+
+.movement-form__warning {
+  margin: 0.75rem 0 0;
+  padding: 0.6rem 0.75rem;
+  background-color: #fef2f2;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  color: #991b1b;
+}
+
+.movement-form__retry {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid #fca5a5;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  color: #991b1b;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.movement-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.movement-form__button {
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.movement-form__button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.movement-form__button--primary {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+.movement-form__button--primary:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.movement-form__button--secondary {
+  background-color: #fff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.movement-form__button--secondary:hover:not(:disabled) {
+  background-color: #f9fafb;
+}

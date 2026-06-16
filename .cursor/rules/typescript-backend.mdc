@@ -1,0 +1,57 @@
+---
+description: Convenciones TypeScript para el backend NestJS
+globs: backend/**/*.ts
+alwaysApply: false
+---
+
+# TypeScript Backend Standards
+
+## Convenciones de Naming
+
+- **Variables y funciones**: `camelCase`
+- **Clases, interfaces, types, enums**: `PascalCase`
+- **Constantes globales**: `UPPER_SNAKE_CASE`
+- **Archivos**: `kebab-case.ts`
+
+## Estructura de Archivos
+
+```
+backend/src/
+  products/
+    dto/
+      create-product.dto.ts
+      update-product.dto.ts
+    entities/
+      product.entity.ts
+    products.controller.ts
+    products.service.ts
+    products.module.ts
+```
+
+## Tipos y Validación
+
+- Usar decoradores de `class-validator` en todos los DTOs
+- Definir tipos explícitos; evitar `any`
+- Usar enums para valores fijos
+
+## Ejemplos
+
+```typescript
+// ✅ BIEN
+export class CreateProductDto {
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(50)
+  sku: string;
+
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @Min(0.01)
+  precio: number;
+}
+
+// ❌ MAL - sin decoradores de validación
+export class CreateProductDto {
+  sku: string;
+  precio: number;
+}
+```

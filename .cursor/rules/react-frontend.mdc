@@ -1,0 +1,122 @@
+---
+description: Convenciones para componentes React y frontend
+globs: frontend/**/*.{tsx,jsx}
+alwaysApply: false
+---
+
+# React Frontend Standards
+
+## Convenciones de Naming
+
+- **Componentes**: `PascalCase`
+- **Hooks personalizados**: `camelCase` con prefijo `use`
+- **Archivos de componentes**: `kebab-case.tsx`
+
+## Estructura de Componentes
+
+```
+frontend/src/
+  components/
+    stock-badge.tsx
+    product-list.tsx
+  hooks/
+    useProducts.ts
+    useStock.ts
+  services/
+    api.ts
+```
+
+## Componentes Funcionales
+
+```tsx
+// ✅ BIEN
+interface StockBadgeProps {
+  stockActual: number;
+  stockMinimo: number;
+  estado: 'activo' | 'inactivo';
+}
+
+export const StockBadge: React.FC<StockBadgeProps> = ({ 
+  stockActual, 
+  stockMinimo, 
+  estado 
+}) => {
+  const getColor = () => {
+    if (estado === 'inactivo') return 'gray';
+    return stockActual >= stockMinimo ? 'green' : 'red';
+  };
+
+  return (
+    <span className={`badge badge-${getColor()}`}>
+      {stockActual}
+    </span>
+  );
+};
+```
+
+## Custom Hooks
+
+```typescript
+// ✅ BIEN
+import { useState, useEffect } from 'react';
+import { api } from '../services/api';
+
+export const useProducts = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await api.get('/products/stock');
+        setProducts(response.data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  return { products, loading, error };
+};
+```
+
+## Validación en Tiempo Real
+
+Para formularios de movimientos:
+
+```tsx
+// ✅ BIEN - validación de stock en tiempo real
+const [cantidad, setCantidad] = useState(0);
+const [stockActual, setStockActual] = useState(0);
+const [error, setError] = useState('');
+
+useEffect(() => {
+  if (tipo === 'salida' && cantidad > stockActual) {
+    setError('Stock insuficiente');
+  } else if (cantidad <= 0) {
+    setError('La cantidad debe ser mayor a 0');
+  } else {
+    setError('');
+  }
+}, [cantidad, tipo, stockActual]);
+```
+
+## Componentes Principales
+
+### StockBadge
+
+Indicador visual con colores:
+- **Verde**: stock >= stock mínimo
+- **Rojo**: stock < stock mínimo (alerta)
+- **Gris**: producto inactivo
+
+### Formulario de Movimiento
+
+- Validación en tiempo real
+- Deshabilitar botón envío si hay errores
+- Mostrar stock antes/después simulado
